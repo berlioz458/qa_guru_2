@@ -1,11 +1,8 @@
 package com.demoqa;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-
 import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
@@ -34,9 +31,7 @@ public class StudentRegistrationFormTest {
 
         $("#userNumber").setValue("0123456789");
         //TODO: решить вопрос с календарем
-        //$("#dateOfBirthInput").setValue("06 Sep 1995");
 
-        //$("#subjectsInput").setValue("Computer Science").pressEnter().setValue("Physics").pressEnter();
         $("#subjectsInput").setValue("Computer");
         $(byText("Computer Science")).click();
 
