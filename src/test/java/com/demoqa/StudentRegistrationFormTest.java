@@ -7,8 +7,7 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTest {
 
@@ -20,7 +19,6 @@ public class StudentRegistrationFormTest {
 
     @Test
     void successTest() {
-
         $("#firstName").setValue("Kate");
 
         $("#lastName").setValue("Shulinina");
@@ -30,23 +28,39 @@ public class StudentRegistrationFormTest {
         $(byText("Female")).click();
 
         $("#userNumber").setValue("0123456789");
-        //TODO: решить вопрос с календарем
 
-        $("#subjectsInput").setValue("Computer");
-        $(byText("Computer Science")).click();
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__year-select").selectOption("1995");
+        $(".react-datepicker__month-select").selectOption("September");
+        $(".react-datepicker__day.react-datepicker__day--006").click();
 
+        $("#subjectsInput").setValue("Computer").pressEnter();
 
         $(byText("Reading")).click();
         $(byText("Music")).click();
 
-        //TODO: решить вопрос с незакрывающимся окном выбора файла
-        $(byText("Select picture")).click();
-        File file = new File("src/131.jpg");
-        $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFile(new File("src/131.jpg"));
 
         $("#currentAddress").setValue("Novosibirsk");
+
+        $("#state").click();
+        $(byText("NCR")).click();
+
+        $("#city").click();
+        $(byText("Delhi")).click();
+
         $("#submit").click();
 
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        $(".table").
+                shouldHave(text("Kate Shulinina")).
+                shouldHave(text("berlioz458@gmail.com")).
+                shouldHave(text("Female")).
+                shouldHave(text("0123456789")).
+                shouldHave(text("06 September,1995")).
+                shouldHave(text("Computer Science")).
+                shouldHave(text("Reading, Music")).
+                shouldHave(text("131.jpg")).
+                shouldHave(text("Novosibirsk")).
+                shouldHave(text("NCR Delhi"));
     }
 }
