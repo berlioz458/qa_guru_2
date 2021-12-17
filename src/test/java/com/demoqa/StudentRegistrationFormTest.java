@@ -39,7 +39,7 @@ public class StudentRegistrationFormTest {
         $(byText("Reading")).click();
         $(byText("Music")).click();
 
-        $("#uploadPicture").uploadFile(new File("src/131.jpg"));
+        $("#uploadPicture").uploadFromClasspath("131.jpg");
 
         $("#currentAddress").setValue("Novosibirsk");
 
@@ -51,16 +51,16 @@ public class StudentRegistrationFormTest {
 
         $("#submit").click();
 
-        $(".table").
-                shouldHave(text("Kate Shulinina")).
-                shouldHave(text("berlioz458@gmail.com")).
-                shouldHave(text("Female")).
-                shouldHave(text("0123456789")).
-                shouldHave(text("06 September,1995")).
-                shouldHave(text("Computer Science")).
-                shouldHave(text("Reading, Music")).
-                shouldHave(text("131.jpg")).
-                shouldHave(text("Novosibirsk")).
-                shouldHave(text("NCR Delhi"));
+        $(".table").shouldHave(
+                text("Kate Shulinina"),
+                text("berlioz458@gmail.com"),
+                text("Female"),
+                text("0123456789"),
+                text("06 September,1995"),
+                text("Computer Science"),
+                text("Reading, Music"),
+                text("131.jpg"),
+                text("Novosibirsk"),
+                text("NCR Delhi"));
     }
 }
