@@ -141,7 +141,7 @@ public class StudentRegistrationFormTest {
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-        $("#userEmail").setValue("berlioz458gmailcom");
+        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBB");
         $(byText("Female")).click();
         $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
