@@ -138,7 +138,7 @@ public class StudentRegistrationFormTest {
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
         $("#userEmail").setValue("berlioz458gmailcom");
         $(byText("Female")).click();
-        $("#userNumber").setValue("ваfff&%^$#");
+        $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
