@@ -98,7 +98,12 @@ public class StudentRegistrationFormTest {
         $(".react-datepicker__day.react-datepicker__day--006").click();
         $("#submit").click();
 
-        $(".table").shouldNotBe(visible);
+        $(".table").shouldBe(visible);
+        $(".table").shouldHave(
+                text("Kate Shulinina"),
+                text("Female"),
+                text("0123456789"),
+                text("06 September,1995"));
     }
 
     @Test
