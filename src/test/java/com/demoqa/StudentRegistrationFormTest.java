@@ -33,7 +33,7 @@ public class StudentRegistrationFormTest {
         $(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("131.jpg");
         $("#currentAddress").setValue("Novosibirsk");
-        $("#state").click();
+        $("#state").scrollTo().click();
         $(byText("NCR")).click();
         $("#city").click();
         $(byText("Delhi")).click();
@@ -62,7 +62,7 @@ public class StudentRegistrationFormTest {
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $(".table").shouldHave(
                 text("Kate Shulinina"),
@@ -81,7 +81,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     void emptyFillFieldsTest() {
-        $("#submit").click();
+        $("#submit").scrollTo().click();
         $(".table").shouldNotBe(visible);
     }
 
@@ -95,7 +95,7 @@ public class StudentRegistrationFormTest {
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $(".table").shouldBe(visible);
         $(".table").shouldHave(
@@ -115,7 +115,7 @@ public class StudentRegistrationFormTest {
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $(".table").shouldNotBe(visible);
     }
@@ -130,7 +130,7 @@ public class StudentRegistrationFormTest {
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $(".table").shouldNotBe(visible);
     }
@@ -140,14 +140,14 @@ public class StudentRegistrationFormTest {
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBB");
+        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBBB");
         $(byText("Female")).click();
         $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+        $("#submit").scrollTo().click();
 
         $(".table").shouldNotBe(visible);
 
