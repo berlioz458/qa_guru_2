@@ -51,6 +51,11 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage shouldNotHaveValue(String value) {
+        resultTable.shouldNotHave(text(value));
+        return this;
+    }
+
     public RegistrationPage setUserEmail(String value) {
         userEmailInput.setValue(value);
 

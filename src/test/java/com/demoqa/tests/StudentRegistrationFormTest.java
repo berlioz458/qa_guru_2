@@ -2,16 +2,20 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.RegistrationPage;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTest {
 
+
+    Faker faker = new Faker();
+    String firstName = faker.name().firstName();
+    String lastName = faker.name().lastName();
+    String email = faker.internet().emailAddress();
     RegistrationPage registrationPage = new RegistrationPage();
 
     @BeforeEach
@@ -23,9 +27,9 @@ public class StudentRegistrationFormTest {
     @Test
     void allFillFieldsTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina")
-                .setUserEmail("berlioz458@gmail.com")
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setUserEmail(email)
                 .setGenderRadioButton().setUserNumberInput("0123456789");
         registrationPage.calendarComponents.setDate("06", "September", "1995");
         registrationPage
@@ -37,10 +41,9 @@ public class StudentRegistrationFormTest {
         registrationPage.stateComponent.setStage("NCR");
         registrationPage.cityComponent.setCity("Delhi");
         registrationPage.submitForm();
-
         registrationPage
-                .shouldHaveValue("Kate Shulinina")
-                .shouldHaveValue("berlioz458@gmail.com")
+                .shouldHaveValue(firstName + " " + lastName)
+                .shouldHaveValue(email)
                 .shouldHaveValue("Female")
                 .shouldHaveValue("0123456789")
                 .shouldHaveValue("06 September,1995")
@@ -55,70 +58,63 @@ public class StudentRegistrationFormTest {
     @Test
     void mandatoryFillFieldsTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("0123456789");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setGenderRadioButton()
+                .setUserNumberInput("0123456789");
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
+        registrationPage.submitForm();
 
-        $(".table").shouldHave(
-                text("Kate Shulinina"),
-                text("Female"),
-                text("0123456789"),
-                text("06 September,1995"));
-        $(".table").shouldNotHave(
-                text("Computer Science"),
-                text("berlioz458@gmail.com"),
-                text("Reading, Music"),
-                text("131.jpg"),
-                text("Novosibirsk"),
-                text("NCR Delhi")
-                );
+        registrationPage
+                .shouldHaveValue(firstName + " " + lastName)
+                .shouldHaveValue("Female")
+                .shouldHaveValue("0123456789")
+                .shouldHaveValue("06 September,1995");
+
+        registrationPage
+                .shouldNotHaveValue("Computer Science")
+                .shouldNotHaveValue("berlioz458@gmail.com")
+                .shouldNotHaveValue("Reading, Music")
+                .shouldNotHaveValue("131.jpg")
+                .shouldNotHaveValue("Novosibirsk")
+                .shouldNotHaveValue("NCR Delhi");
+
     }
 
     @Test
     void emptyFillFieldsTest() {
-        $("#submit").click();
+        registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
     }
 
     @Test
-    void invalidMaxLengthPhoneNumberTest() {
+    void validMaxLengthPhoneNumberTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("012345678910");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setGenderRadioButton()
+                .setUserNumberInput("0123456789");
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
+        registrationPage.submitForm();
 
         $(".table").shouldBe(visible);
-        $(".table").shouldHave(
-                text("Kate Shulinina"),
-                text("Female"),
-                text("0123456789"),
-                text("06 September,1995"));
+        registrationPage
+                .shouldHaveValue(firstName + " " + lastName)
+                .shouldHaveValue("Female")
+                .shouldHaveValue("0123456789")
+                .shouldHaveValue("06 September,1995");
+
     }
 
     @Test
     void invalidMinLengthPhoneNumberTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("012345678");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setGenderRadioButton()
+                .setUserNumberInput("012345678");
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
+        registrationPage.submitForm();
 
         $(".table").shouldNotBe(visible);
     }
@@ -126,36 +122,26 @@ public class StudentRegistrationFormTest {
     @Test
     void invalidPatternPhoneNumberTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("ваfff&%^$#");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
-
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setGenderRadioButton()
+                .setUserNumberInput("ваfff&%^$#");
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
+        registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
     }
 
     @Test
     void invalidPatternEmailFieldTest() {
         registrationPage
-                .setFirstNameInput("Kate")
-                .setLastNameInput("Shulinina");
+                .setFirstNameInput(firstName)
+                .setLastNameInput(lastName)
+                .setUserEmail("a.-_A0@a.-_A0.aaaBBB")
+                .setGenderRadioButton()
+                .setUserNumberInput("0123456789");
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBBB");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("0123456789");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#submit").click();
-
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
+        registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
-
-
     }
 }
