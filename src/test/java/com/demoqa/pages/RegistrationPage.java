@@ -1,6 +1,10 @@
 package com.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import com.demoqa.components.CalendarComponents;
+import com.demoqa.components.CityComponent;
+import com.demoqa.components.StateComponent;
+import org.checkerframework.checker.units.qual.C;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -22,6 +26,9 @@ public class RegistrationPage {
                     submitButton = $("#submit")
                     ;
 
+    public CalendarComponents calendarComponents = new CalendarComponents();
+    public StateComponent stateComponent = new StateComponent();
+    public CityComponent cityComponent = new CityComponent();
 
     public void openPage() {
         open("https://demoqa.com/automation-practice-form");

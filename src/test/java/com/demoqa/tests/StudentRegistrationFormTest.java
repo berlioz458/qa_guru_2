@@ -27,26 +27,15 @@ public class StudentRegistrationFormTest {
                 .setLastNameInput("Shulinina")
                 .setUserEmail("berlioz458@gmail.com")
                 .setGenderRadioButton().setUserNumberInput("0123456789");
-
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption("1995");
-        $(".react-datepicker__month-select").selectOption("September");
-        $(".react-datepicker__day.react-datepicker__day--006").click();
-
+        registrationPage.calendarComponents.setDate("06", "September", "1995");
         registrationPage
                 .setSubjectsInput("Computer")
                 .setHobbieReadingCheckBox()
                 .setHobbieMusicCheckBox()
                 .setPictureUpload("131.jpg")
                 .setCurrentAddressInput("Novosibirsk");
-
-
-        $("#state").click();
-        $(byText("NCR")).click();
-
-        $("#city").click();
-        $(byText("Delhi")).click();
-
+        registrationPage.stateComponent.setStage("NCR");
+        registrationPage.cityComponent.setCity("Delhi");
         registrationPage.submitForm();
 
         registrationPage
