@@ -1,6 +1,7 @@
 package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.demoqa.pages.RegistrationPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,51 +12,62 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class StudentRegistrationFormTest {
 
+    RegistrationPage registrationPage = new RegistrationPage();
+
     @BeforeEach
     void setUp() {
         Configuration.browserSize = "1920x1080";
-        open("https://demoqa.com/automation-practice-form");
+        registrationPage.openPage();
     }
 
     @Test
     void allFillFieldsTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
-        $("#userEmail").setValue("berlioz458@gmail.com");
-        $(byText("Female")).click();
-        $("#userNumber").setValue("0123456789");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina")
+                .setUserEmail("berlioz458@gmail.com")
+                .setGenderRadioButton().setUserNumberInput("0123456789");
+
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption("1995");
         $(".react-datepicker__month-select").selectOption("September");
         $(".react-datepicker__day.react-datepicker__day--006").click();
-        $("#subjectsInput").setValue("Computer").pressEnter();
-        $(byText("Reading")).click();
-        $(byText("Music")).click();
-        $("#uploadPicture").uploadFromClasspath("131.jpg");
-        $("#currentAddress").setValue("Novosibirsk");
+
+        registrationPage
+                .setSubjectsInput("Computer")
+                .setHobbieReadingCheckBox()
+                .setHobbieMusicCheckBox()
+                .setPictureUpload("131.jpg")
+                .setCurrentAddressInput("Novosibirsk");
+
+
         $("#state").click();
         $(byText("NCR")).click();
+
         $("#city").click();
         $(byText("Delhi")).click();
-        $("#submit").click();
 
-        $(".table").shouldHave(
-                text("Kate Shulinina"),
-                text("berlioz458@gmail.com"),
-                text("Female"),
-                text("0123456789"),
-                text("06 September,1995"),
-                text("Computer Science"),
-                text("Reading, Music"),
-                text("131.jpg"),
-                text("Novosibirsk"),
-                text("NCR Delhi"));
+        registrationPage.submitForm();
+
+        registrationPage
+                .shouldHaveValue("Kate Shulinina")
+                .shouldHaveValue("berlioz458@gmail.com")
+                .shouldHaveValue("Female")
+                .shouldHaveValue("0123456789")
+                .shouldHaveValue("06 September,1995")
+                .shouldHaveValue("Computer Science")
+                .shouldHaveValue("Reading, Music")
+                .shouldHaveValue("131.jpg")
+                .shouldHaveValue("Novosibirsk")
+                .shouldHaveValue("NCR Delhi");
+
     }
 
     @Test
     void mandatoryFillFieldsTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina");
         $(byText("Female")).click();
         $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
@@ -87,8 +99,9 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidMaxLengthPhoneNumberTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina");
         $(byText("Female")).click();
         $("#userNumber").setValue("012345678910");
         $("#dateOfBirthInput").click();
@@ -107,8 +120,9 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidMinLengthPhoneNumberTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina");
         $(byText("Female")).click();
         $("#userNumber").setValue("012345678");
         $("#dateOfBirthInput").click();
@@ -122,8 +136,9 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidPatternPhoneNumberTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina");
         $(byText("Female")).click();
         $("#userNumber").setValue("ваfff&%^$#");
         $("#dateOfBirthInput").click();
@@ -137,10 +152,11 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidPatternEmailFieldTest() {
-        $("#firstName").setValue("Kate");
-        $("#lastName").setValue("Shulinina");
+        registrationPage
+                .setFirstNameInput("Kate")
+                .setLastNameInput("Shulinina");
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBB");
+        $("#userEmail").setValue("a.-_A0@a.-_A0.aaaBBB");
         $(byText("Female")).click();
         $("#userNumber").setValue("0123456789");
         $("#dateOfBirthInput").click();
