@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class TestBase {
 
+    RegistrationPage registrationPage = new RegistrationPage();
+
     @BeforeAll
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";

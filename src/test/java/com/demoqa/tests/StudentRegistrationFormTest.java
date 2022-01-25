@@ -22,7 +22,6 @@ public class StudentRegistrationFormTest extends TestBase{
     String firstName = faker.name().firstName();
     String lastName = faker.name().lastName();
     String email = faker.internet().emailAddress();
-    RegistrationPage registrationPage = new RegistrationPage();
 
 
     @Test
