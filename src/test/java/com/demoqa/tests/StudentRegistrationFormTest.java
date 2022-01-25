@@ -187,5 +187,6 @@ public class StudentRegistrationFormTest {
     @AfterEach
     void addAttach(){
         Attach.screenshotAs("Page screen after test");
+        Attach.addVideo();
     }
 }
