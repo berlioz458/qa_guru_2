@@ -14,11 +14,12 @@ public class StudentRegistrationFormTest {
     @BeforeEach
     void setUp() {
         Configuration.browserSize = "1920x1080";
-        open("https://demoqa.com/automation-practice-form");
+        //open("https://demoqa.com/automation-practice-form");
     }
 
     @Test
     void allFillFieldsTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         $("#userEmail").setValue("berlioz458@gmail.com");
@@ -54,6 +55,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     void mandatoryFillFieldsTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         $(byText("Female")).click();
@@ -81,12 +83,14 @@ public class StudentRegistrationFormTest {
 
     @Test
     void emptyFillFieldsTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#submit").scrollTo().click();
         $(".table").shouldNotBe(visible);
     }
 
     @Test
     void invalidMaxLengthPhoneNumberTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         $(byText("Female")).click();
@@ -107,6 +111,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidMinLengthPhoneNumberTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         $(byText("Female")).click();
@@ -122,6 +127,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidPatternPhoneNumberTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         $(byText("Female")).click();
@@ -137,6 +143,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     void invalidPatternEmailFieldTest() {
+        open("https://demoqa.com/automation-practice-form");
         $("#firstName").setValue("Kate");
         $("#lastName").setValue("Shulinina");
         //pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
