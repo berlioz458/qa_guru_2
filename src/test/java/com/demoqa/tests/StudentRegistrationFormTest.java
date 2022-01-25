@@ -1,6 +1,7 @@
 package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.demoqa.helpers.Attach;
 import com.demoqa.pages.RegistrationPage;
 import com.github.javafaker.Faker;
@@ -187,6 +188,7 @@ public class StudentRegistrationFormTest {
     @AfterEach
     void addAttach(){
         Attach.screenshotAs("Page screen after test");
+        Selenide.closeWebDriver();
         Attach.addVideo();
     }
 }
