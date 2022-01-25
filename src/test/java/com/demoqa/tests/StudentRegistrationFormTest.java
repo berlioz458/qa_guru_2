@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class StudentRegistrationFormTest {
+public class StudentRegistrationFormTest extends TestBase{
 
 
     Faker faker = new Faker();
