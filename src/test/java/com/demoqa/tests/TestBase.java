@@ -17,18 +17,18 @@ public class TestBase {
     static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        /*Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
+        Configuration.browserCapabilities = capabilities;*/
     }
 
     @AfterEach
     void addAttach(){
         Attach.screenshotAs("Page screen after test");
-        Selenide.closeWebDriver();
-        Attach.addVideo();
+        //Selenide.closeWebDriver();
+        //Attach.addVideo();
     }
 }

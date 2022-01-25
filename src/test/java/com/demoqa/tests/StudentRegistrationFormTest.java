@@ -31,6 +31,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Severity(SeverityLevel.CRITICAL)
     void allFillFieldsTest() {
         registrationPage
+                .openPage()
                 .setFirstNameInput(firstName)
                 .setLastNameInput(lastName)
                 .setUserEmail(email)
@@ -64,6 +65,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Регистриция при заполнении только обязательных полей")
     @Severity(SeverityLevel.CRITICAL)
+    @Disabled
     void mandatoryFillFieldsTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -94,6 +96,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Регистрация при незаполненных полях на форме")
     @Severity(SeverityLevel.NORMAL)
+    @Disabled
     void emptyFillFieldsTest() {
         registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
@@ -104,6 +107,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Возможность заполнения поля валидным номером телефона")
     @Severity(SeverityLevel.NORMAL)
+    @Disabled
     void validMaxLengthPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -127,6 +131,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Возможность заполнения поля не валидным номером телефона по длине")
     @Severity(SeverityLevel.TRIVIAL)
+    @Disabled
     void invalidMinLengthPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -144,6 +149,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Возможность заполнения поля необычными символами")
     @Severity(SeverityLevel.TRIVIAL)
+    @Disabled
     void invalidPatternPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -160,6 +166,7 @@ public class StudentRegistrationFormTest extends TestBase{
     @Epic("Форма регистрации")
     @Story("Возможность заполнения поля не по паттерну")
     @Severity(SeverityLevel.TRIVIAL)
+    @Disabled
     void invalidPatternEmailFieldTest() {
         registrationPage
                 .setFirstNameInput(firstName)

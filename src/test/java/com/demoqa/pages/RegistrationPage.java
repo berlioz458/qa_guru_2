@@ -32,8 +32,10 @@ public class RegistrationPage {
     public CityComponent cityComponent = new CityComponent();
 
     @Step("Перейти на страницу регистрации")
-    public void openPage() {
+    public RegistrationPage openPage() {
         open("/automation-practice-form");
+
+        return this;
     }
 
     @Step("Ввести имя пользователя")
