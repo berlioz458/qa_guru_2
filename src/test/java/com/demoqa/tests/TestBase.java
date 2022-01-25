@@ -28,7 +28,7 @@ public class TestBase {
     @AfterEach
     void addAttach(){
         Attach.screenshotAs("Page screen after test");
-        //Selenide.closeWebDriver();
-        //Attach.addVideo();
+        Selenide.closeWebDriver();
+        Attach.addVideo();
     }
 }
