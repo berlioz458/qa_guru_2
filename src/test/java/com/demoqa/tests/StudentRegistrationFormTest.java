@@ -3,7 +3,13 @@ package com.demoqa.tests;
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.RegistrationPage;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -32,6 +38,10 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Проверка возможности регистрации при заполнении всех полей формы")
+    @Epic("Форма регистрации")
+    @Story("Регистрация при заполнении всех полей в форме")
+    @Severity(SeverityLevel.CRITICAL)
     void allFillFieldsTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -63,6 +73,10 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Проверка возможности регистрации при заполнении только обязательных полей формы")
+    @Epic("Проверка формы регистрации")
+    @Story("Регистриция при заполнении только обязательных полей")
+    @Severity(SeverityLevel.CRITICAL)
     void mandatoryFillFieldsTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -89,12 +103,20 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Проверка невозможности регистрации если поля оставить пустые")
+    @Epic("Форма регистрации")
+    @Story("Регистрация при незаполненных полях на форме")
+    @Severity(SeverityLevel.NORMAL)
     void emptyFillFieldsTest() {
         registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
     }
 
     @Test
+    @DisplayName("Валидация поля с номером телефона")
+    @Epic("Форма регистрации")
+    @Story("Возможность заполнения поля валидным номером телефона")
+    @Severity(SeverityLevel.NORMAL)
     void validMaxLengthPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -114,6 +136,10 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Ввод в номер телефона меньше символов допустимого значения")
+    @Epic("Форма регистрации")
+    @Story("Возможность заполнения поля не валидным номером телефона по длине")
+    @Severity(SeverityLevel.TRIVIAL)
     void invalidMinLengthPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -127,6 +153,10 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Ввод не валидных символов в номер телефона")
+    @Epic("Форма регистрации")
+    @Story("Возможность заполнения поля необычными символами")
+    @Severity(SeverityLevel.TRIVIAL)
     void invalidPatternPhoneNumberTest() {
         registrationPage
                 .setFirstNameInput(firstName)
@@ -139,6 +169,10 @@ public class StudentRegistrationFormTest {
     }
 
     @Test
+    @DisplayName("Валидация поля с почтовым адресом")
+    @Epic("Форма регистрации")
+    @Story("Возможность заполнения поля не по паттерну")
+    @Severity(SeverityLevel.TRIVIAL)
     void invalidPatternEmailFieldTest() {
         registrationPage
                 .setFirstNameInput(firstName)
