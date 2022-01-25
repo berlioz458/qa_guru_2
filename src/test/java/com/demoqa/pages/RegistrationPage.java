@@ -33,7 +33,7 @@ public class RegistrationPage {
 
     @Step("Перейти на страницу регистрации")
     public void openPage() {
-        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
     }
 
     @Step("Ввести имя пользователя")

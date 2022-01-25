@@ -24,17 +24,6 @@ public class StudentRegistrationFormTest {
     String email = faker.internet().emailAddress();
     RegistrationPage registrationPage = new RegistrationPage();
 
-    @BeforeEach
-    void setUp() {
-        Configuration.browserSize = "1920x1080";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
-        Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
-        registrationPage.openPage();
-    }
 
     @Test
     @DisplayName("Проверка возможности регистрации при заполнении всех полей формы")
@@ -183,12 +172,5 @@ public class StudentRegistrationFormTest {
         registrationPage.calendarComponents.setDate("06", "September", "1995");
         registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
-    }
-
-    @AfterEach
-    void addAttach(){
-        Attach.screenshotAs("Page screen after test");
-        //Selenide.closeWebDriver();
-        //Attach.addVideo();
     }
 }
