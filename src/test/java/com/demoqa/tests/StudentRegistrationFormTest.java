@@ -5,6 +5,7 @@ import com.demoqa.pages.RegistrationPage;
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -21,6 +22,12 @@ public class StudentRegistrationFormTest {
     @BeforeEach
     void setUp() {
         Configuration.browserSize = "1920x1080";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", false);
+        Configuration.browserCapabilities = capabilities;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
         registrationPage.openPage();
     }
 
