@@ -1,16 +1,14 @@
 package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
+import com.demoqa.helpers.Attach;
 import com.demoqa.pages.RegistrationPage;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -74,7 +72,7 @@ public class StudentRegistrationFormTest {
 
     @Test
     @DisplayName("Проверка возможности регистрации при заполнении только обязательных полей формы")
-    @Epic("Проверка формы регистрации")
+    @Epic("Форма регистрации")
     @Story("Регистриция при заполнении только обязательных полей")
     @Severity(SeverityLevel.CRITICAL)
     void mandatoryFillFieldsTest() {
@@ -184,5 +182,10 @@ public class StudentRegistrationFormTest {
         registrationPage.calendarComponents.setDate("06", "September", "1995");
         registrationPage.submitForm();
         $(".table").shouldNotBe(visible);
+    }
+
+    @AfterEach
+    void addAttach(){
+        Attach.screenshotAs("Page screen after test");
     }
 }
