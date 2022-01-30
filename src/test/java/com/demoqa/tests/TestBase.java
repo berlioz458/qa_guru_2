@@ -38,7 +38,7 @@ public class TestBase {
     void addAttach(){
         Attach.screenshotAs("Page screen after test");
         Attach.pageSource();
-        //Attach.browserConsoleLogs();
+        Attach.browserConsoleLogs();
         Attach.addVideo();
         closeWebDriver();
     }
