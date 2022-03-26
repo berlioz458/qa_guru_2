@@ -26,9 +26,11 @@ public class TestBase {
         String login = config.login();
         String password = config.password();
 
+        System.out.println(login + " " + password);
+
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize");
-        //Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = "1920x1080";
         Configuration.remote = String.format("https://%s:%s@%s", login, password, remoteUrl);
         //Configuration.browser = System.getProperty("browser");
         //Configuration.browserVersion = System.getProperty("browserVersion");
