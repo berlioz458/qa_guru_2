@@ -22,14 +22,15 @@ public class TestBase {
 
     @BeforeAll
     static void setUp() {
-        String remoteUrl = System.getProperty("remoteUrl");
+        //String remoteUrl = System.getProperty("remoteUrl");
+        String remoteUrl = "selenoid.autotests.cloud/wd/hub";
         String login = config.login();
         String password = config.password();
 
         System.out.println(login + " " + password);
 
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = System.getProperty("browserSize");
+        //Configuration.browserSize = System.getProperty("browserSize");
         Configuration.browserSize = "1920x1080";
         Configuration.remote = String.format("https://%s:%s@%s", login, password, remoteUrl);
         //Configuration.browser = System.getProperty("browser");
