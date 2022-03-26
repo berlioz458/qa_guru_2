@@ -2,8 +2,10 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.demoqa.config.CredentialsConfig;
 import com.demoqa.helpers.Attach;
 import com.demoqa.pages.RegistrationPage;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,11 +17,14 @@ public class TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
 
+    static CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class);
+
+
     @BeforeAll
     static void setUp() {
         String remoteUrl = System.getProperty("remoteUrl");
-        String login = System.getProperty("login");
-        String password = System.getProperty("password");
+        String login = config.login();
+        String password = config.password();
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize");

@@ -29,9 +29,11 @@ compileTestJava {
 
 dependencies {
     testImplementation (
-            'com.codeborne:selenide:5.25.1',
-            'com.github.javafaker:javafaker:1.0.2',
-            "org.junit.jupiter:junit-jupiter-api:5.8.2")
+            "com.codeborne:selenide:5.25.1",
+            "com.github.javafaker:javafaker:1.0.2",
+            "org.junit.jupiter:junit-jupiter-api:5.8.2",
+            "org.aeonbits.owner:owner:1.0.4"
+    )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
